@@ -74,15 +74,21 @@ function App() {
   }
 
   const onToggle = (id)=>{
-    let newArray = [...users];
+    // let newArray = [...users];
     
-    newArray.forEach((e,i)=>{
-      if(id===e.id){
-        e.active = !e.active
-       setUsers(newArray);
-      }
-      
-    })
+    // newArray.forEach((e,i)=>{
+      // if(id===e.id){
+        // e.active = !e.active
+      //  setUsers(newArray);
+      // }})
+    setUsers(
+    users.map(e=>{
+      return e.id === id ? {...e,active: !e.active} 
+      :e
+    } 
+      )
+    
+    );
   }
   return (
     // <Wrapper>
