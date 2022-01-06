@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
 
-function User({user,onRemove}){
+function User({user,onRemove,onToggle}){
     return(
         <div>
-            <b>{user.username}</b> <span>({user.email})</span>
+            
+            <b 
+                style={{
+                    cursor:'pointer',
+                    color: user.active === true
+                    ? 'green' 
+                    : 'black'
+                }}
+                onClick={()=>{
+                    onToggle(user.id);                }}
+            >{user.username}
+            </b> 
+            <span>({user.email})</span>
         <button onClick={()=>{
         //   console.log(user.id);
           onRemove(user.id);
@@ -14,13 +26,13 @@ function User({user,onRemove}){
         </div>
     )
 }
-function UserList({users,onRemove}){
+function UserList({users,onRemove,onToggle}){
    
     return(
         <div>
             {console.log(users)}
             {users.map((e,i)=>{
-                return (<User key={e.id} user={e} onRemove={onRemove}></User>)
+                return (<User key={e.id} user={e} onRemove={onRemove} onToggle={onToggle}></User>)
             })}
         </div>
     )

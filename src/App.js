@@ -31,16 +31,19 @@ function App() {
         id:1,
         username:"velopert",
         email:'pub',
+        active:true,
     },
     {
         id:2,
         username:"do",
         email:'sdasd',
+        active:false,
     },
     {
         id:3,
         username:"dosd",
         email:'sdasd',
+        active:false,
     }
   ])
   const nextId = useRef(4);
@@ -50,6 +53,7 @@ function App() {
       id:nextId.current,
       username:inputs.username,
       email,
+    
     }
 
     setUsers(users.concat(user));
@@ -69,7 +73,17 @@ function App() {
     // setUsers(users.filter(user => user.id !== id));
   }
 
-
+  const onToggle = (id)=>{
+    let newArray = [...users];
+    
+    newArray.forEach((e,i)=>{
+      if(id===e.id){
+        e.active = !e.active
+       setUsers(newArray);
+      }
+      
+    })
+  }
   return (
     // <Wrapper>
 
@@ -93,7 +107,7 @@ function App() {
         onChange={onChange}
         onCreate={onCreate}
       />
-    <UserList users={users} onRemove={onRemove}/>
+    <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
      </>
       )
 }
