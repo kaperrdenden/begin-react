@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function User({user,onRemove,onToggle}){
+    useEffect(()=>{
+        console.log("user 값이 설정됨");
+       
+    },[]);
     return(
+     
         <div>
             
             <b 
@@ -30,7 +35,7 @@ function UserList({users,onRemove,onToggle}){
    
     return(
         <div>
-            {console.log(users)}
+            {/* {console.log(users)} */}
             {users.map((e,i)=>{
                 return (<User key={e.id} user={e} onRemove={onRemove} onToggle={onToggle}></User>)
             })}
