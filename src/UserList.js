@@ -4,7 +4,7 @@ const User =  React.memo(function User({user,onRemove,onToggle}){
     useEffect(()=>{
         console.log("user 값이 설정됨");
        
-    },[]);
+    });
     return(
      
         <div>

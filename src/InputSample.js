@@ -1,7 +1,9 @@
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef, useEffect } from 'react';
 
 function InputSample(){
-
+    useEffect(()=>{
+        console.log("발동");
+    })
     const [inputs,setInputs] = useState({
     name:'',
     nickname:'',
