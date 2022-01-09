@@ -8,7 +8,7 @@ import InputSample
  import UserList from './UserList';
  import CreateUser from './CreateUser';
 import { useState } from 'react/cjs/react.development';
-
+import Test from './test';
 function conutActiveUsers(users){
   console.log("활성사용자 수를");
   return users.filter((user)=>{
@@ -104,6 +104,7 @@ function App() {
     return  conutActiveUsers(users)
   },[users])
   return (
+ 
     // <Wrapper>
       // <Hello name="react" color="red"
       //isSpecial={true}
@@ -118,6 +119,7 @@ function App() {
     // <Counter/>
     // <InputSample/>
       <>
+         <Test/>
       {/* {console.log(users)} */}
       <CreateUser 
         username={username}
