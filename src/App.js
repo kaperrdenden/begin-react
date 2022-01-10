@@ -8,6 +8,7 @@ import InputSample
  import UserList from './UserList';
  import CreateUser from './CreateUser';
 import { useState } from 'react/cjs/react.development';
+import useInputs from './useInputs';
 
 function conutActiveUsers(users){
   console.log("활성사용자 수를");
@@ -84,21 +85,21 @@ function App() {
   )
 
   const onToggle =useCallback( (id)=>{
-    // let newArray = [...users];
+    let newArray = [...users];
     
-    // newArray.forEach((e,i)=>{
-      // if(id===e.id){
-        // e.active = !e.active
-      //  setUsgiers(newArray);
-      // }})
-    setUsers(
-    users.map(e=>{
-      return e.id === id ? {...e,active: !e.active} 
-      :e
-    } 
-      )
+    newArray.forEach((e,i)=>{
+      if(id===e.id){
+        e.active = !e.active
+       setUsers(newArray);
+      }})
+    // setUsers(
+    // users.map(e=>{
+    //   return e.id === id ? {...e,active: !e.active} 
+    //   :e
+    // } 
+    //   )
     
-    );
+    // );
   },[users]);
   const count =useMemo(()=>{
     return  conutActiveUsers(users)
