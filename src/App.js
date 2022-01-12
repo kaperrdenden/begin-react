@@ -1,137 +1,141 @@
-import React, {useMemo, useRef,useCallback} from 'react';
-import Hello from './Hello';
-import Wrapper from './Wrapper';
-import './App.css';
-import Counter from './Counter';
-import InputSample
- from './InputSample';
- import UserList from './UserList';
- import CreateUser from './CreateUser';
-import { useState } from 'react/cjs/react.development';
-import useInputs from './useInputs';
+import React, { useRef, useState, useMemo, useCallback,useReducer } from 'react';
+import UserList from './UserList';
+import CreateUser from './CreateUser';
 
-function conutActiveUsers(users){
-  console.log("활성사용자 수를");
-  return users.filter((user)=>{
-    return user.active
-  }).length;
+function countActiveUsers(users) {
+  console.log('활성 사용자 수를 세는중...');
+  return users.filter(user => user.active).length;
 }
 
+const initialState = {
+  inputs:{
+    username:'',
+    email:'',
+  },
+  users: [
+    {
+      id: 1,
+      username: 'velopert',
+      email: 'public.velopert@gmail.com',
+      active: true
+    },
+    {
+      id: 2,
+      username: 'tester',
+      email: 'tester@example.com',
+      active: false
+    },
+    {
+      id: 3,
+      username: 'liz',
+      email: 'liz@example.com',
+      active: false
+    }
+  ]
+}
+function reducer(state,action){
+  switch (action.type){
+    case "CHANGE_INPUT":
+      return{
+        ...state,
+        inputs:{
+          ...state.inputs,
+          [action.name]: action.value
+        }
+      }
+      default:
+        return state;
+  }
+
+}
 function App() {
+const [state, dispatch] = useReducer(reducer, initialState);
+  const {users} = state;
+      const {username, email}  = state.inputs;
 
-  const [inputs,setInputs] = useState(
-    {
-      username:'',
-      email:'',
-    }
-  )
-  const {username,email} = inputs;
+      const onChange = useCallback(e => {
+        const {name,value} = e.target;
+        dispatch({
+          type: "CHANGE_INPUT",
+          name,
+          value
+        })
+      },[]);
+  // const [inputs, setInputs] = useState({
+  //   username: '',
+  //   email: ''
+  // });
+  // const { username, email } = inputs;
+  // const onChange = e => {
+  //   const { name, value } = e.target;
+  //   setInputs({
+  //     ...inputs,
+  //     [name]: value
+  //   });
+  // };
+  // const [users, setUsers] = useState([
+  //   {
+  //     id: 1,
+  //     username: 'velopert',
+  //     email: 'public.velopert@gmail.com',
+  //     active: true
+  //   },
+  //   {
+  //     id: 2,
+  //     username: 'tester',
+  //     email: 'tester@example.com',
+  //     active: false
+  //   },
+  //   {
+  //     id: 3,
+  //     username: 'liz',
+  //     email: 'liz@example.com',
+  //     active: false
+  //   }
+  // ]);
 
-  const onChange = (e)=>{
-    // console.log(e.target.name);
-    const {name,value} = e.target;
-    setInputs({
-      ...inputs,
-      [name]:value
-    });
-  };
-
-  const [users,setUsers] =useState( [
-    {
-        id:1,
-        username:"velopert",
-        email:'pub',
-        active:true,
-    },
-    {
-        id:2,
-        username:"do",
-        email:'sdasd',
-        active:false,
-    },
-    {
-        id:3,
-        username:"dosd",
-        email:'sdasd',
-        active:false,
-    }
-  ])
-  const nextId = useRef(4);
-  const onCreate =useCallback( ()=>{
-    // console.log(username);
-    const user = {
-      id:nextId.current,
-      username:inputs.username,
-      email,
-    
-    }
-
-    setUsers(users.concat(user));
-    // setUsers([...users, user]);
-   
-    setInputs({
-      username:'',
-      email:'',
-    })
-    
-    
+  // const nextId = useRef(4);
+  // const onCreate =  useCallback(()=>{
   
-    nextId.current += 1;
-  },[users,username,email]);
-  const onRemove = useCallback( (id)=>{
-    setUsers(users.filter( (e,i)=>{return id !== e.id}));
-    // setUsers(users.filter(user => user.id !== id));
-  },[users]
-  )
-
-  const onToggle =useCallback( (id)=>{
-    let newArray = [...users];
-    
-    newArray.forEach((e,i)=>{
-      if(id===e.id){
-        e.active = !e.active
-       setUsers(newArray);
-      }})
-    // setUsers(
-    // users.map(e=>{
-    //   return e.id === id ? {...e,active: !e.active} 
-    //   :e
-    // } 
-    //   )
-    
-    // );
-  },[users]);
-  const count =useMemo(()=>{
-    return  conutActiveUsers(users)
-  },[users])
-  return (
+  //     const user = {
+  //       id: nextId.current,
+  //       username,
+  //       email
+  //     };
+  //     setUsers(users.concat(user));
+  
+  //     setInputs({
+  //       username: '',
+  //       email: ''
+  //     });
+  //     nextId.current += 1;
  
-    // <Wrapper>
-      // <Hello name="react" color="red"
-      //isSpecial={true}
-      // isSpecial
-      // 이렇게 넘길 props의 이름만 적으면 이는 알아서 true로 자동초기화 
-      //  />
-      // <Hello color="pink" />
-      
-      // <div style={style}>{name}</div>
-      // <div className='gray-box'></div>
-    // </Wrapper>
-    // <Counter/>
-    // <InputSample/>
-      <> 
-        
-      {/* {console.log(users)} */}
-      <CreateUser 
-        username={username}
-        email={email}
-        onChange={onChange}
-        onCreate={onCreate}
+  // },[users]) 
+
+  // const onRemove = id => {
+  //   // user.id 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
+  //   // = user.id 가 id 인 것을 제거함
+  //   setUsers(users.filter(user => user.id !== id));
+  // };
+  // const onToggle = id => {
+  //   setUsers(
+  //     users.map(user =>
+  //       user.id === id ? { ...user, active: !user.active } : user
+  //     )
+  //   );
+  // };
+  // const count =useMemo(()=>{
+  //  return countActiveUsers(users)
+  // },[users])
+  return (
+    <>
+      <CreateUser username={username} email={email}
+      onChange={onChange}
       />
-    <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
-     <div>활성 사용자 수 :{count}</div>
-     </>
-      )
+      <UserList users={users}  />
+      <div>활성사용자 수 : 0</div>
+    </>
+  );
 }
 
 export default App;

@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
+
+function reducer(state, action) {
+    if (action.type==="INCREMENT"){
+        return state + 1
+    }else if(action.type === "DECREMENT"){
+        return state - 1
+    }
+    return state;
+}
 
 function Counter(){
-    const [number, setNumber]  = useState(0);
+    const [number, dispatch] = useReducer(reducer,0)
+    // const [number, setNumber]  = useState(0);
 
     const onIncrease = ()=>{
-       setNumber(number+1);
+      dispatch({type:"INCREMENT"});
     };
     const onDecrease=()=>{
-        setNumber(number-1);
+        dispatch({type:"DECREMENT"});
     }
 
     return(
