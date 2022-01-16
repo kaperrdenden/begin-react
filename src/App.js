@@ -2,17 +2,13 @@ import React, { useRef, useState, useMemo, useCallback,useReducer } from 'react'
 import Hello from './Hello';
 import Wrapper from './Wrapper';
 import Counter from './Counter';
+import InputSample from './InputSample';
 function App() {
 
-  const onIncrease = ()=>{
-    console.log("+1");
-  }
-  const onDecrease = () => {
-    console.log("-1");
-  }
+ 
   return (
     <>
-      <Counter/>
+    <InputSample/>
     </>
   );
 }
