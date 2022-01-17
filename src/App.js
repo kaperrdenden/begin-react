@@ -4,9 +4,26 @@ import Wrapper from './Wrapper';
 import Counter from './Counter';
 import InputSample from './InputSample';
 import UserList from './UserList';
-function App() {
+import CreateUser from './CreateUser';
 
-  const users = [
+function App() {
+  const [inputs, setInputs] = useState({
+    username:'',
+    email:'',
+  })
+
+  const {username,email} = inputs;
+
+  const onChange = (e)=>{
+    const {value, name} = e.target;
+
+    setInputs(
+     { ...inputs,
+      [name]:value,}
+    )
+  }
+
+  const [users, setUsers] = useState([
     {
         id:1,
         username:'kim',
@@ -22,10 +39,28 @@ function App() {
         username:'dasdas',
         email:'zzssdikf@laksdasd.com',
     },
-]
+]) 
+  const nextId = useRef(4);
+  
+  const onCreate = (e) => {
+    const user = {
+      id:nextId.current,
+      username,
+      email,
+    }
+  //  setUsers([...users, user])
+  setUsers(users.concat(user));
+    setInputs({
+      username:'',
+      email:''
+    })
+    nextId.current += 1;
+  }
   return (
     <>
-     <InputSample/>
+
+     {/* <InputSample/> */}
+     <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} />
      <UserList users={users}/>
     </>
   );
