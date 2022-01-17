@@ -10,25 +10,9 @@ function User({user}){
     )
 }
 
-function UserList() {
+function UserList({users}) {
 
-    const users = [
-        {
-            id:1,
-            username:'kim',
-            email:'iojfoasdikf@laksdasd.com',
-        },
-        {
-            id:2,
-            username:'ddm',
-            email:'DSDWdadikf@laksdasd.com',
-        },
-        {
-            id:3,
-            username:'dasdas',
-            email:'zzssdikf@laksdasd.com',
-        },
-    ]
+    
     return(
 
         <>

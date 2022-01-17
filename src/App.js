@@ -6,11 +6,27 @@ import InputSample from './InputSample';
 import UserList from './UserList';
 function App() {
 
- 
+  const users = [
+    {
+        id:1,
+        username:'kim',
+        email:'iojfoasdikf@laksdasd.com',
+    },
+    {
+        id:2,
+        username:'ddm',
+        email:'DSDWdadikf@laksdasd.com',
+    },
+    {
+        id:3,
+        username:'dasdas',
+        email:'zzssdikf@laksdasd.com',
+    },
+]
   return (
     <>
      <InputSample/>
-     <UserList/>
+     <UserList users={users}/>
     </>
   );
 }
