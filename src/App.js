@@ -6,7 +6,15 @@ import InputSample from './InputSample';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
 
+function countActiveUsers(users){
+  console.log('활성 사용자 수 세는 중');
+  return users.filter((e,i)=>{return e.active === true}).length;
+}
+
 function App() {
+
+
+
   const [inputs, setInputs] = useState({
     username:'',
     email:'',
@@ -74,12 +82,15 @@ function App() {
         )
     )
   }
+  const count = useMemo(()=>{return countActiveUsers(users)},[users]) ;
+  // users내용이 바뀌지 않았다면 이전의 값을 계속 사용함.
   return (
     <>
 
      {/* <InputSample/> */}
      <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} />
      <UserList users={users} onRemove={onRemove} onToggle={onToggle}/>
+     <div>활성사용자 수 :  {count}</div>
     </>
   );
 }

@@ -7,7 +7,7 @@ function User({user, onRemove, onToggle}){
        return ()=>{
            console.log("컴포넌트가 화면에서 사라짐");
        }
-   },[user])
+   })
     return(
         <div>
             <b 
