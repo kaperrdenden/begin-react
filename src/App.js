@@ -53,7 +53,7 @@ function App() {
 ]) 
   const nextId = useRef(4);
   
-  const onCreate = (e) => {
+  const onCreate = useCallback(()=>{
     const user = {
       id:nextId.current,
       username,
@@ -64,13 +64,15 @@ function App() {
     setInputs({
       username:'',
       email:''
-    })
+    },[users,username,email])
     nextId.current += 1;
-  }
-  const onRemove = (id)=>{
+  })
+  
+  const onRemove = useCallback( (id)=>{
     setUsers(users.filter((user,i)=>{return user.id !== id }))
-  }
-  const onToggle = (id)=>{
+  },[users]);
+ 
+  const onToggle = useCallback((id)=>{
     // 액티브 버튼을 누르면 이 함수로 인해서 users 를 한번 싹 돈다
     setUsers(
       users.map(user=>
@@ -81,7 +83,7 @@ function App() {
         : user
         )
     )
-  }
+  },[users]) 
   const count = useMemo(()=>{return countActiveUsers(users)},[users]) ;
   // users내용이 바뀌지 않았다면 이전의 값을 계속 사용함.
   return (
