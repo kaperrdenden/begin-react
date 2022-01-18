@@ -56,12 +56,15 @@ function App() {
     })
     nextId.current += 1;
   }
+  const onRemove = (id)=>{
+    setUsers(users.filter((user,i)=>{return user.id !== id }))
+  }
   return (
     <>
 
      {/* <InputSample/> */}
      <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} />
-     <UserList users={users}/>
+     <UserList users={users} onRemove={onRemove}/>
     </>
   );
 }
