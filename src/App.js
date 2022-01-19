@@ -58,6 +58,7 @@ function reducer(state, action){
   }
   return state;
 }
+export const UserDispatch = React.createContext(null);
 function App() {
   const [{username,email},onChange,reset]= useInputs({
     username:'',
@@ -97,18 +98,18 @@ function App() {
     reset();
     nextId.current += 1;
   },[username, email, reset])
-  const onToggle = useCallback((id)=>{
-    dispatch({
-      type:"TOGGLE_USER",
-      id,
-    })
-  },[])
-  const onRemove = useCallback((id)=>{
-    dispatch({
-      type: "REMOVE_USER",
-      id
-    })
-  },[])
+  // const onToggle = useCallback((id)=>{
+  //   dispatch({
+  //     type:"TOGGLE_USER",
+  //     id,
+  //   })
+  // },[])
+  // const onRemove = useCallback((id)=>{
+  //   dispatch({
+  //     type: "REMOVE_USER",
+  //     id
+  //   })
+  // },[])
 //   const [users, setUsers] = useState([
 //     {
 //         id:1,
@@ -166,18 +167,19 @@ function App() {
   // users내용이 바뀌지 않았다면 이전의 값을 계속 사용함.
   return (
     <>
-
+    <UserDispatch.Provider value={dispatch}>
      {/* <InputSample/> */}
      <CreateUser username={username}
       email={email}
        onChange={onChange}
         onCreate={onCreate} />
-     <UserList users={users} 
-     onRemove={onRemove}
-      onToggle={onToggle}
-      />
+     <UserList 
+      users={users} 
+      // onRemove={onRemove}
+      // onToggle={onToggle}
+    />
      <div>활성사용자 수 :  {count}</div>
-     
+     </UserDispatch.Provider>
     </>
   );
 }
