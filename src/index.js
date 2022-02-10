@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import InputSample from './InputSample';
+import UserList from './UserList';
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <InputSample />
+    <UserList />
   </React.StrictMode>,
   document.getElementById('root')
 );
