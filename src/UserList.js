@@ -18,11 +18,8 @@ function UserList({users}) {
     return(
 
         <>
-       
-              {users.map((user) => {
-            return( <User user={user} key={user.id} /> )
-         })}
-         
+                {console.log(users,"d")}
+            
         </>
         
     )
