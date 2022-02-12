@@ -13,9 +13,7 @@ function User({user}) {
 function UserList({ users }) {
     return (
       <div>
-        {users.map(user => (
-          <User user={user} key={user.id} />
-        ))}
+       
       </div>
     );
   }
