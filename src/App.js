@@ -48,10 +48,10 @@ function App() {
   const onCreate = () => {
     const user = {
       id:nextId.current,
-      username,
+      username, //onChnage에서 username이라는 state는 인풋창에 있는 값으로 실시간 매칭됨
       email
     };
-    setUsers([...users, user]);
+    setUsers(users.concat(user));
 
     setInputs({
       username:'',
