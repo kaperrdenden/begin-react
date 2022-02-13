@@ -9,6 +9,20 @@ import useInputs from './hooks/useInputs';
 
 
 function App() {
+  const [inputs, setInputs] = useState({
+    username:'',
+    email:'',
+  })
+  const {username, email} = inputs;
+
+  const onChange = e => {
+    const {name, value} = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    })
+  }
+
   const users = [
     {
         id:1,
@@ -29,10 +43,24 @@ function App() {
   
   const nextId = useRef(4);
   
+
+  const onCreate = () => {
+
+    setInputs({
+      username:'',
+      email:'',
+    });
+    nextId.current += 1;
+  }
   return (
     <>
-      {/* <div>asdas</div> */}
-      <UserList nextId={nextId} users={users}/>
+      <CreateUser 
+        username={username}
+        email={email}
+        onChange={onChange}
+        onCreate={onCreate}
+      />
+      <UserList users={users}/>
     </>
   );
 }
