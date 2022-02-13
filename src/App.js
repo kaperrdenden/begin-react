@@ -22,8 +22,7 @@ function App() {
       [name]: value,
     })
   }
-
-  const users = [
+  const [users, setUsers] = useState([
     {
         id:1,
         username: 'Dong',
@@ -39,7 +38,8 @@ function App() {
         username: 'kang',
         email: 'wdsa2ssssmail.com',
     }
-];
+]);
+  
   
   const nextId = useRef(4);
   
