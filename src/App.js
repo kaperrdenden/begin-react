@@ -67,6 +67,13 @@ function App() {
       return user.id !== id
     }))
   }
+  const onToggle = (id) => {
+   setUsers(
+     users.map((user) => {
+       return id === user.id ? {...user, active: !user.active} : user
+     })
+   )
+  }
   return (
     <>
       <CreateUser 
@@ -78,6 +85,7 @@ function App() {
       <UserList 
         users={users}
         onRemove={onRemove}  
+        onToggle={onToggle}
       />
     </>
   );
