@@ -9,7 +9,7 @@ import useInputs from './hooks/useInputs';
 
 
 function App() {
-  const [inputs, setInputs] = useState({
+  const [inputs, setInputs] = useState({ // setInputs를 통해서 input창을 다룬다
     username:'',
     email:'',
   })
@@ -28,7 +28,7 @@ function App() {
         username: 'Dong',
         email: 'weather2sogood@gmail.com',
     },
-    
+
     {
         id:2,
         username: 'hee',
@@ -46,11 +46,17 @@ function App() {
   
 
   const onCreate = () => {
+    const user = {
+      id:nextId.current,
+      username,
+      email
+    };
+    setUsers([...users, user]);
 
     setInputs({
       username:'',
       email:'',
-    });
+    })
     nextId.current += 1;
   }
   return (
