@@ -10,10 +10,15 @@ function User({user}) {
       
     )
 }
-function UserList({ users }) {
+function UserList({users}) {
+  
+    
     return (
       <div>
-       
+          {console.log(users,"here")}
+        {users.map(user => (
+          <User user={user} key={user.id} />
+        ))}
       </div>
     );
   }

@@ -25,13 +25,14 @@ function App() {
         username: 'kang',
         email: 'wdsa2ssssmail.com',
     }
-]
-
+];
+  
   const nextId = useRef(4);
   
   return (
     <>
-      <UserList users={users}/>
+      {/* <div>asdas</div> */}
+      <UserList nextId={nextId} users={users}/>
     </>
   );
 }

@@ -9,7 +9,7 @@ import UserList from './UserList';
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserList />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
