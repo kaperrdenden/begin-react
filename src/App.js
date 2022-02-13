@@ -27,17 +27,20 @@ function App() {
         id:1,
         username: 'Dong',
         email: 'weather2sogood@gmail.com',
+        active:true,
     },
 
     {
         id:2,
         username: 'hee',
         email: 'ssmail.com',
+        active:false,
     },
     {
         id:3,
         username: 'kang',
         email: 'wdsa2ssssmail.com',
+        active:false,
     }
 ]);
   
