@@ -69,10 +69,13 @@ function App() {
   }
   const onToggle = (id) => {
    setUsers(
-     users.map((user) => {
+     users.map((user) => { 
+       //map은 주어진 배열의 값을 재정의 할 때 사용하는 방법이다.
+       //users의 각 엘리먼트들의 값을 재정의하고 재정의된 그룹의 배열을 반환한다
        return id === user.id ? {...user, active: !user.active} : user
      })
    )
+ 
   }
   return (
     <>
