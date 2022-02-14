@@ -40,16 +40,43 @@ const initialState = {
   ]
 };
 
-function App() {
+function reducer(state, action){
+  switch (action.type){
+    case "CHANGE_INPUT":
+      return {
+        ...state,
+        inputs:{
+          ...state.inputs,
+          [action.name]:action.value,
 
- 
+        }
+      }
+  }
+  return state;
+}
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { users } = state;
+  const { username,email } = state.inputs;
+
+  const onChange = useCallback( e => {
+    const {name, value} = e.target;
+    dispatch({
+      type: "CHANGE_INPUT",
+      name,
+      value,
+  });
+  },[] );
   return (
     <>
       <CreateUser 
-      
+        username={username}
+        email={email}
+        onChange={onChange}
       />
       <UserList 
-        users={[]} 
+        users={users} 
       />
        
       <div>활성사용자 수: 0</div>
