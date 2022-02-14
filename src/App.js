@@ -19,13 +19,16 @@ function App() {
   })
   const {username, email} = inputs;
 
-  const onChange = e => {
-    const {name, value} = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    })
-  }
+  const onChange = useCallback(
+    e => {
+      const {name, value} = e.target;
+      setInputs({
+        ...inputs,
+        [name]: value,
+      })
+    }, [inputs]
+  )
+
   const [users, setUsers] = useState([
     {
         id:1,
@@ -52,7 +55,7 @@ function App() {
   const nextId = useRef(4);
   
 
-  const onCreate = () => {
+  const onCreate = useCallback(() => {
     const user = {
       id:nextId.current,
       username, //onChnage에서 username이라는 state는 인풋창에 있는 값으로 실시간 매칭됨
@@ -65,23 +68,30 @@ function App() {
       email:'',
     })
     nextId.current += 1;
-  }
-  const onRemove = id => {
-    setUsers(users.filter((user)=>{
-      return user.id !== id
-    }))
-  }
-  const onToggle = (id) => {
-   setUsers(
-     users.map((user) => { 
-       //map은 주어진 배열의 값을 재정의 할 때 사용하는 방법이다.
-       //users의 각 엘리먼트들의 값을 재정의하고 재정의된 그룹의 배열을 반환한다
-       return id === user.id ? {...user, active: !user.active} : user
-     })
-   )
+  },[users, username, email]) 
+  const onRemove = useCallback(
+    id => {
+      setUsers(users.filter((user)=>{
+        return user.id !== id
+      }))
+    },[users]
+  ) 
+  const onToggle = useCallback( (id) => {
+    setUsers(
+      users.map((user) => { 
+        //map은 주어진 배열의 값을 재정의 할 때 사용하는 방법이다.
+        //users의 각 엘리먼트들의 값을 재정의하고 재정의된 그룹의 배열을 반환한다
+        return id === user.id ? {...user, active: !user.active} : user
+      })
+    )
+  
+   }
+    ,[users])
+  const count = useMemo(() =>
+   countActiveUsers(users)
+  ,[users]) 
+  
  
-  }
-  const count = countActiveUsers(users);
   return (
     <>
       <CreateUser 

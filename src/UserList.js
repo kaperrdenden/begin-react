@@ -1,10 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { UserDispatch } from './App';
 
-function countActiveUsers(users){
-    console.log('활성 사용자 수를 세는 중');
-    return users.filter(user => user.active).length;
-}
 
 function User({user, onRemove, onToggle}) {
     useEffect(()=>{
@@ -12,7 +8,7 @@ function User({user, onRemove, onToggle}) {
         return () => {
             console.log('화면에서 사라짐')
         }
-    })
+    },[user])
 
     return(
    
