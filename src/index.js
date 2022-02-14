@@ -4,12 +4,13 @@ import './index.css';
 import App from './App';
 import InputSample from './InputSample';
 import UserList from './UserList';
+import TestApp from './TestApp';
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TestApp />
   </React.StrictMode>,
   document.getElementById('root')
 );
