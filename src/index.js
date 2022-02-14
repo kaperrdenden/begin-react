@@ -10,7 +10,7 @@ import TestApp from './TestApp';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TestApp />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

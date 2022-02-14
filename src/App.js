@@ -12,6 +12,7 @@ function countActiveUsers(users){
   return users.filter(user => user.active).length;
 }
 
+
 function App() {
   const [inputs, setInputs] = useState({ // setInputs를 통해서 input창을 다룬다
     username:'',
@@ -22,9 +23,11 @@ function App() {
   const onChange = useCallback(
     e => {
       const {name, value} = e.target;
-      setInputs({
-        ...inputs,
-        [name]: value,
+      setInputs(prevInputs => {
+        return {
+          ...prevInputs,
+          [name]: value,
+        }
       })
     }, [inputs]
   )
