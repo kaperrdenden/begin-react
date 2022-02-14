@@ -1,13 +1,18 @@
 import React, { useContext, useEffect } from 'react';
 import { UserDispatch } from './App';
 
+function countActiveUsers(users){
+    console.log('활성 사용자 수를 세는 중');
+    return users.filter(user => user.active).length;
+}
+
 function User({user, onRemove, onToggle}) {
     useEffect(()=>{
         console.log('컴포넌트가 화면에 나타남');
         return () => {
-            console.log('화면에서 사라짐');
+            console.log('화면에서 사라짐')
         }
-    },[])
+    })
 
     return(
    

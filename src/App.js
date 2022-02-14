@@ -7,6 +7,10 @@ import UserList from './UserList';
 import CreateUser from './CreateUser';
 import useInputs from './hooks/useInputs';
 
+function countActiveUsers(users){
+  console.log('활성 사용자 수를 세는 중');
+  return users.filter(user => user.active).length;
+}
 
 function App() {
   const [inputs, setInputs] = useState({ // setInputs를 통해서 input창을 다룬다
@@ -77,6 +81,7 @@ function App() {
    )
  
   }
+  const count = countActiveUsers(users);
   return (
     <>
       <CreateUser 
@@ -90,6 +95,7 @@ function App() {
         onRemove={onRemove}  
         onToggle={onToggle}
       />
+      <div>활성사용자 수: {count}</div>
     </>
   );
 }
