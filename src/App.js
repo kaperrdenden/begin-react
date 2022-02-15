@@ -60,7 +60,7 @@ function reducer(state, action){
       return {
         ...state,
         users: state.users.map((user) => {
-          return user.id === action.id ? {...user, active:!state.active} 
+          return user.id === action.id ? {...user, active:!user.active} 
           : user
         })
       }
@@ -74,6 +74,8 @@ function reducer(state, action){
     }
   return state;
 }
+
+export const UserDispatch = React.createContext(null);
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -119,7 +121,8 @@ function App() {
   
   },[]);
   return (
-    <>
+    <UserDispatch.Provider value={dispatch}>
+   
       <CreateUser 
         username={username}
         email={email}
@@ -134,7 +137,8 @@ function App() {
       />
        
       <div>활성사용자 수: 0</div>
-    </>
+   
+    </UserDispatch.Provider>
   );
 }
 
