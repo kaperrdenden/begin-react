@@ -104,22 +104,7 @@ function App() {
     });
     nextId.current += 1;
   },[username,email]);
-  const onToggle = useCallback( id => {
-    dispatch({
-      type:"TOGGLE_USER",
-      id,
-    });
-   
-   
-  },[]);
-
-  const onRemove = useCallback( id =>{
-    dispatch({
-      type:"REMOVE_USER",
-      id,
-    });
-  
-  },[]);
+ 
   return (
     <UserDispatch.Provider value={dispatch}>
    
@@ -132,8 +117,7 @@ function App() {
       />
       <UserList 
         users={users} 
-        onToggle={onToggle}
-        onRemove={onRemove}
+    
       />
        
       <div>활성사용자 수: 0</div>
