@@ -36,6 +36,12 @@ const initialState = {
       username: 'kang',
       email: 'wdsa2ssssmail.com',
       active:false,
+    },
+    {
+      id:4,
+      username: 'kg',
+      email: 'sdasdsasda2ssssmaiasdasdadsdasdl.com',
+      active:false,
     }
   ]
 };
@@ -65,7 +71,7 @@ export const UserDispatch = React.createContext(null);
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const nextId = useRef(4);
+  const nextId = useRef(5);
 
   const { users } = state;
   const { username,email } = state.inputs;
