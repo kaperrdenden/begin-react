@@ -32,10 +32,10 @@ const SortedWords = ({words}) => {
     )
 }
 
+
 const TestApp = () => {
     const [words, setWords] = useState([]);
     const [word, setWord] = useState("");
-
     const handleClick = () => {
        
         setWords(words.concat(word));
